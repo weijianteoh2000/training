@@ -30,3 +30,4 @@ class Solution:
                 res = res[res.index(i) + 1:] + i
             count = max(count, len(res))
         return count
+ 
