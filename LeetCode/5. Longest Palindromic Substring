@@ -1,0 +1,46 @@
+# Technical Used: Find from center instead of checking all
+
+# Given a string s, return the longest palindromic substring in s.
+# 
+
+#Example 1:
+#Input: s = "babad"
+#Output: "bab"
+#Explanation: "aba" is also a valid answer.
+
+#Example 2:
+#Input: s = "cbbd"
+#Output: "bb"
+
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        res = ""
+        resLen = 0
+        start, end = 0, 0
+        # algo - O(n^2) - starting from the at the chara and expanding outwards
+
+        # 2 cases - even and odd len palindrome 
+        for i in range(len(s)):
+
+            # odd len
+            l, r = i, i
+            # while pointer is still in bound and is a palindrome
+            while l >=0 and r <len(s) and s[r] == s[l]:
+                if (r-l+1 > resLen):
+                    start = l
+                    end = r+1
+                    resLen = r-l+1
+                l-=1
+                r+=1
+
+            # even len
+            l, r = i, i+1
+            while l>=0 and r<len(s) and s[r] == s[l]:
+                if (r-l+1 > resLen):
+                    start = l
+                    end = r+1
+                    resLen = r-l+1
+                l-=1
+                r+=1
+
+        return s[start:end]
